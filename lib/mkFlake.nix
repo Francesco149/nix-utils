@@ -102,7 +102,7 @@ flake-parts.lib.mkFlake { inherit inputs; } {
             # home manager modules
             [ home-manager.nixosModules.home-manager ]
             ++ lib.mapAttrsToList (
-              user: imports: import ../modules/hm/home.nix { inherit user imports mkHomeDir; }
+              user: imports: import ../modules/hm/home.nix { inherit user imports; }
             ) mergedWithDefaults
             # generate users
             ++ lib.mapAttrsToList (user: _: {
