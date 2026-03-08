@@ -4,6 +4,8 @@
       assertion = false;
       message = ''
         =========================================================================
+        please provide your machine's hosts/nixos/configuration.nix
+
         adjust to match your /etc/nixos/configuration.nix from the fresh install.
         run `nixos-generate-config` on the target machine to regenerate this.
         or simply copy it over and adjust/remove any pre configured software
