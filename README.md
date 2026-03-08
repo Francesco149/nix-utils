@@ -364,6 +364,9 @@ over your hardware config:
 nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configuration.nix
 ```
 
+Copy over your `/etc/nixos/configuration.nix` or edit it to match things like
+`stateVersion` .
+
 And deploy:
 
 ```sh
