@@ -362,8 +362,9 @@ nix flake init -t github:Francesco149/nix-utils
 git add .
 ```
 
-Then edit `flake.nix` and replace `nixos` with your machine name, copy
-over your hardware config:
+Then edit `flake.nix` and replace `nixos` with your machine name.
+
+Copy over your hardware config:
 
 ```sh
 nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configuration.nix
@@ -371,6 +372,12 @@ nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configuratio
 
 Copy over your `/etc/nixos/configuration.nix` or edit it to match things like
 `stateVersion` .
+
+Edit `hosts/nixos/nixos.nix` to your liking, add whatever software and
+configuration you want.
+
+If you need to maintain ssh access to this machine after deployment, make sure
+to edit the `nut.ssh.authorizedKeys` part and add your own ssh key(s).
 
 And deploy:
 
