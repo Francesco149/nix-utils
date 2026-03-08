@@ -55,6 +55,11 @@ root on port 22 and `nut.ssh.authorizedKeys` as the authorized keys. You can
 check the ssh config in this repo at `common/ssh.nix`. Port can be customized
 from `nut.ports.ssh` .
 
+### default nix config
+
+Enables `experimental-features = flakes nix-command` . You basically never want
+to have these off if you're working with flakes.
+
 Deploy with:
 
 ```sh
