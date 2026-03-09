@@ -120,6 +120,11 @@ flake-parts.lib.mkFlake { inherit inputs; } {
                 isNormalUser = user != "root";
                 createHome = true;
                 home = mkHomeDir user;
+                extraGroups = [
+                  "video"
+                  "render"
+                  "wheel"
+                ];
               };
             }) mergedHmModules
           )

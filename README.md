@@ -203,6 +203,8 @@ either your user or root after deployment to set the password with `passwd`.
 Alternatively, you can set `users.users.myuser.initialPassword = changeme;` or
 something to that effect, which will be ignored after you set a password.
 
+Users are also automatically added to the groups `video` `render` and `wheel`.
+
 The home manager modules are merged with each machine's modules. There is no
 `homeConfigurations` . iF you wish to do things differently, you can simply omit
 hmModules and use home-manager independently.
