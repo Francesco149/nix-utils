@@ -393,22 +393,23 @@ Feel free to submit your own templates.
 ### example: deploying the hyprland template
 
 ```sh
+nix shell nixpkgs#git # if you don't have git
 mkdir flake && cd flake
 git init
 nix flake init -t github:Francesco149/nix-utils#hyprland
 git add .
 ```
 
-Then edit `flake.nix` and replace `nixos` with your machine name.
-
 Copy over your hardware config:
 
 ```sh
-nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configuration.nix
+nixos-generate-config --dir ./hosts/nixos/ --force
 ```
 
-Copy over your `/etc/nixos/configuration.nix` to `hosts/nixos/configuration.nix`
-or edit it to match things like `stateVersion` .
+If you had anything in your `/etc/nixos/configuration.nix` that you want to move
+over, make sure to add it to `./hosts/nixos/nixos.nix` . Also check what's in
+`./hosts/nixos/configuration.nix` to make sure nothing is missing that you might
+have specifically configured.
 
 If you need to maintain ssh access to this machine after deployment, make sure
 to add your ssh key(s) to `nut.ssh.authorizedKeys` in `hosts/nixos/nixos.nix` .
@@ -431,6 +432,9 @@ Poke around in `hosts/nixos/hm/home.nix`, try customizing and adding things.
 
 Edit `hosts/nixos/nixos.nix` to your liking, add whatever system-wide software and
 configuration you want that doesn't fit in home-manager.
+
+If you want to rename your host, edit `flake.nix` and replace `nixos` with your
+machine name, then rename `./hosts/nixos` to a matching dir name.
 
 Re-deploy changes:
 
