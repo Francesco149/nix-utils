@@ -375,12 +375,27 @@ by getting rid of the default modules.
 
 ## flake template
 
-The fastest way to get started is with the included template:
+The fastest way to get started is with the included templates.
+
+When using a template, the flake is automatically initialized with a base
+working configuration that you can begin editing to your needs.
+
+Currently, we have:
+
+- `default`: a barebones system with no graphical interface and the bare minimum
+  ssh config
+- `hyprland`: a basic hyprland config using home-manager with some customizations,
+  login manager, lock screen, status bar, default applications, all the basic
+  things that you would usually set up.
+
+Feel free to submit your own templates.
+
+### example: deploying the hyprland template
 
 ```sh
-mkdir my-nixos-config && cd my-nixos-config
+mkdir flake && cd flake
 git init
-nix flake init -t github:Francesco149/nix-utils
+nix flake init -t github:Francesco149/nix-utils#hyprland
 git add .
 ```
 
@@ -392,20 +407,32 @@ Copy over your hardware config:
 nixos-generate-config --show-hardware-config > hosts/nixos/hardware-configuration.nix
 ```
 
-Copy over your `/etc/nixos/configuration.nix` or edit it to match things like
-`stateVersion` .
-
-Edit `hosts/nixos/nixos.nix` to your liking, add whatever software and
-configuration you want.
+Copy over your `/etc/nixos/configuration.nix` to `hosts/nixos/configuration.nix`
+or edit it to match things like `stateVersion` .
 
 If you need to maintain ssh access to this machine after deployment, make sure
-to edit the `nut.ssh.authorizedKeys` part and add your own ssh key(s).
+to add your ssh key(s) to `nut.ssh.authorizedKeys` in `hosts/nixos/nixos.nix` .
 
-And deploy:
+Deploy and reboot into your hyprland desktop:
+
+```sh
+nixos-rebuild switch --flake .#nixos
+reboot
+```
+
+Poke around in `hosts/nixos/hm/home.nix`, try customizing and adding things.
+
+Edit `hosts/nixos/nixos.nix` to your liking, add whatever system-wide software and
+configuration you want that doesn't fit in home-manager.
+
+Re-deploy changes:
 
 ```sh
 nixos-rebuild switch --flake .#nixos
 ```
+
+Usually, configuration changes are picked up automatically and things like
+themes refresh on the fly. Should they not, try relogging or rebooting.
 
 ---
 
