@@ -40,8 +40,18 @@ following modules:
 
 ### `hosts/myhost/configuration.nix`
 
-Your hardware/boot config. Just copy over your `/etc/nixos/configuration.nix`
-and `/etc/nixos/hardware-configuration.nix` .
+Your hardware/boot config.
+
+You can generate a clean one with:
+
+```sh
+nixos-generate-config --dir ./hosts/nixos/ --force
+```
+
+If it's not a fresh system and you previously configured anything system-wide
+that you want to keep, migrate that from your`/etc/nixos/configuration.nix` and
+`/etc/nixos/hardware-configuration.nix` to the ones we just generated in
+`./hosts/nixos/` .
 
 ### `hosts/myhost/myhost.nix`
 
