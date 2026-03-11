@@ -40,7 +40,7 @@ flake-parts.lib.mkFlake { inherit inputs; } {
     { pkgs, system, ... }:
     {
       devShells.default = import ./mkDevShell.nix { inherit pkgs; };
-      checks = lib.optionalAttrs (deploy-rs != null) deploy-rs.lib.${system}.deployChecks self.deploy;
+      checks = lib.optionalAttrs (deploy-rs != null) (deploy-rs.lib.${system}.deployChecks self.deploy);
     }
     // (perSystem { inherit pkgs system; });
 
