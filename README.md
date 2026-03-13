@@ -386,14 +386,15 @@ by getting rid of the default modules.
 ## flake templates (nut shells)
 
 The fastest way to get started is with the [included
-templates](https://github.com/Francesco149/nut-shells) .
+templates](https://github.com/Francesco149/nut-shells?tab=readme-ov-file#templates) .
 
 When using a template, the flake is automatically initialized with a base
 working configuration that you can begin editing to your needs.
 
-Check the [nut-shells](https://github.com/Francesco149/nut-shells) repository
-out. Feel free to submit your own templates. We aim to have templates for each
-major desktop ecosystem.
+Check the
+[nut-shells](https://github.com/Francesco149/nut-shells?tab=readme-ov-file#templates)
+repository out. Feel free to submit your own templates. We aim to have templates
+for each major desktop ecosystem.
 
 ---
 
