@@ -33,15 +33,5 @@
         mf = mkFlake;
         dumb = name: attrset: mkDumbModule { inherit name attrset; };
       };
-
-      flake.templates.default = {
-        path = ./templates/default;
-        description = "minimal nut NixOS config";
-      };
-
-      flake.templates.hyprland = {
-        path = ./templates/hyprland;
-        description = "basic hyprland config";
-      };
     };
 }

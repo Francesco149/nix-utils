@@ -383,80 +383,17 @@ by getting rid of the default modules.
 
 ---
 
-## flake template
+## flake templates (nut shells)
 
-The fastest way to get started is with the included templates.
+The fastest way to get started is with the [included
+templates](https://github.com/Francesco149/nut-shells) .
 
 When using a template, the flake is automatically initialized with a base
 working configuration that you can begin editing to your needs.
 
-Currently, we have:
-
-- `default`: a barebones system with no graphical interface and the bare minimum
-  ssh config
-- `hyprland`: a basic hyprland config using home-manager with some customizations,
-  login manager, lock screen, status bar, default applications, all the basic
-  things that you would usually set up.
-
-Feel free to submit your own templates.
-
-### example: deploying the hyprland template
-
-```sh
-nix shell nixpkgs#git # if you don't have git
-mkdir flake && cd flake
-git init
-nix flake init -t github:Francesco149/nut#hyprland
-git add .
-```
-
-Copy over your hardware config:
-
-```sh
-nixos-generate-config --dir ./hosts/nixos/ --force
-```
-
-If you had anything in your `/etc/nixos/configuration.nix` that you want to move
-over, make sure to add it to `./hosts/nixos/nixos.nix` . Also check what's in
-`./hosts/nixos/configuration.nix` to make sure nothing is missing that you might
-have specifically configured.
-
-If you need to maintain ssh access to this machine after deployment, make sure
-to add your ssh key(s) to `nut.ssh.authorizedKeys` in `hosts/nixos/nixos.nix` .
-
-Deploy:
-
-```sh
-nixos-rebuild switch --flake .#nixos
-```
-
-Make sure to change alice's password before you reboot, then reboot into your
-hyprland desktop. Log in as the demo user alice.
-
-```sh
-passwd alice
-reboot
-```
-
-Poke around in `hosts/nixos/hm/home.nix`, try customizing and adding things.
-
-Check out `flake.nix` , try adding more users or renaming alice to your own
-user. Experiment with modularizing your configuration.
-
-Edit `hosts/nixos/nixos.nix` to your liking, add whatever system-wide software
-and configuration you want that doesn't fit in home-manager.
-
-If you want to rename your host, edit `flake.nix` and replace `nixos` with your
-machine name, then rename `./hosts/nixos` to a matching dir name.
-
-Re-deploy changes:
-
-```sh
-nixos-rebuild switch --flake .#nixos
-```
-
-Usually, configuration changes are picked up automatically and things like
-themes refresh on the fly. Should they not, try relogging or rebooting.
+Check the [nut-shells](https://github.com/Francesco149/nut-shells) repository
+out. Feel free to submit your own templates. We aim to have templates for each
+major desktop ecosystem.
 
 ---
 
