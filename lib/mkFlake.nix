@@ -77,37 +77,42 @@ flake-parts.lib.mkFlake { inherit inputs; } {
             deploy.host = name;
             ssh.authorizedKeys = [ ];
             ports.ssh = 22;
+            dbus.implementation = "broker";
           })
 
           # either host gets automatically determined or it's explicitly set
           { inherit (normalized) nut; }
         ]
         ++ [
-          {
-            # I don't think you would ever not want flakes enabled with this type
-            # of configuration so just enable them by default
-            nix.settings.experimental-features = [
-              "flakes"
-              "nix-command"
-            ];
+          (
+            { config, ... }:
+            {
+              # I don't think you would ever not want flakes enabled with this type
+              # of configuration so just enable them by default
+              nix.settings.experimental-features = [
+                "flakes"
+                "nix-command"
+              ];
 
-            # on a fresh install, debus is enabled. if we disable it, we will run into
-            # timeouts trying to stop dbug upon deploying the flake.
-            # by enabling dbus we sidestep the issue and users will likely want it on
-            # on desktop anyway.
+              # on a fresh install, debus is enabled. if we disable it, we will run into
+              # timeouts trying to stop dbug upon deploying the flake.
+              # by enabling dbus we sidestep the issue and users will likely
+              # want it on
+              # on desktop anyway.
 
-            # UPDATE: it also needs to use the broker implementation because
-            # many things like polkit will want that implementation.
-            # when the implementation is switched, it errors on a normal
-            # rebuild switch and requires `nixos-rebuild boot --flake .#nixos` .
-            # this can be confusing to a new user so we should just default to
-            # whatever makes the first deployment easiest.
+              # UPDATE: it also needs to use the broker implementation because
+              # many things like polkit will want that implementation. when the
+              # implementation is switched, it errors on a normal rebuild switch
+              # and requires `nixos-rebuild boot --flake .#nixos` . this can be
+              # confusing to a new user so we should just default to whatever
+              # makes the first deployment easiest.
 
-            services.dbus = {
-              enable = true;
-              implementation = "broker";
-            };
-          }
+              services.dbus = {
+                enable = true;
+                inherit (config.nut.dbus) implmentation;
+              };
+            }
+          )
         ]
         ++ (mkDefaultModules name)
         ++ modules
