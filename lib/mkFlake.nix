@@ -94,11 +94,10 @@ flake-parts.lib.mkFlake { inherit inputs; } {
                 "nix-command"
               ];
 
-              # on a fresh install, debus is enabled. if we disable it, we will run into
-              # timeouts trying to stop dbug upon deploying the flake.
+              # on a fresh install, dbus is enabled. if we disable it, we will
+              # run into timeouts trying to stop dbug upon deploying the flake.
               # by enabling dbus we sidestep the issue and users will likely
-              # want it on
-              # on desktop anyway.
+              # want it on on desktop anyway.
 
               # UPDATE: it also needs to use the broker implementation because
               # many things like polkit will want that implementation. when the
@@ -109,7 +108,7 @@ flake-parts.lib.mkFlake { inherit inputs; } {
 
               services.dbus = {
                 enable = true;
-                inherit (config.nut.dbus) implmentation;
+                inherit (config.nut.dbus) implementation;
               };
             }
           )
